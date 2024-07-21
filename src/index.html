@@ -3,13 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script type="module" src="/js/main.js"></script>
+    <title>Premier League Fixtures</title>
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
 
   <body>
+    <header>
+      <nav>
+        <div id="logo-container">
+          <a href="index.html">
+            <img src="/images/logo.webp" alt="Logo" id="logo" />
+
+            <span>Premier League Match Hub</span>
+          </a>
+        </div>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/fixture/index.html">fixture</a></li>
+          <li><a href="teams.html">Teams</a></li>
+        </ul>
+      </nav>
+    </header>
+
     <main>
-      <h1>Leagues</h1>
+      <section class="hero">
+        <img src="/images/Premier_League_Logo_hero.png" alt="Hero Image" />
+      </section>
+      <div id="home-container">
+        <section class="fixture-container">
+          <h2>Upcoming Matches</h2>
+          <!-- Upcoming matches will be rendered here -->
+        </section>
+        <section id="twitter-feed">
+          <h2>Twitter Feed - Premier League</h2>
+          <p>PLACEHOLDER as I've got limited calls to the API</p>
+          <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script> -->
+          <div
+            class="elfsight-app-d4fdd55d-75ae-4996-8009-bd95bad09d7f"
+            data-elfsight-app-lazy
+          ></div>
+        </section>
+      </div>
     </main>
+    <footer>
+      <p>&copy; 2024 Premier Match Hub. All rights reserved.</p>
+      <p>All you need to know about the best football league in the world.</p>
+    </footer>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

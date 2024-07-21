@@ -1,0 +1,32 @@
+//import Fixture from "./fixture";
+
+//const fixture = new Fixture();
+
+
+
+//fixture.renderNextRoundFixtures(premierLeagueId, currentSeason);
+
+
+
+import { insertFootballWidget } from './fixture.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM loaded")
+    const date = ""; // Optionally specify a date
+    const league = 39; // Optionally specify a league ID
+    const season = "2024"; // Optionally specify a season
+    const theme = ""; // Optionally specify a theme
+
+    insertFootballWidget(date, league, season, theme);
+});
+
+//const premierLeagueId = 39; // Verify this ID from the API documentation
+//const currentSeason = 2024; // Specify the current season
+
+// const date = ""; // Optionally specify a datec
+// const league = 39; // Optionally specify a league ID
+// const season = 2024; // Optionally specify a season
+// const theme = "grey"; // Optionally specify a theme
+
+// insertFootballWidget(date, league, season, theme);
+

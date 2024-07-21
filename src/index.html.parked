@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League Fixtures</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html">
+                <img src="/images/logo.webp" alt="Logo" id="logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rounds.html">Rounds</a></li>
+                <li><a href="teams.html">Teams</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="fixture-container">
+            <h2>Upcoming Matches</h2>
+            <div id="wg-api-football-games" data-host="api-football-v1.p.rapidapi.com"
+                data-key="269ed5dbc7mshe975718ad9ad0c7p15dee0jsnb0e168e6abb7" data-date="" data-league="39"
+                data-season="2024" data-theme="grey" data-refresh="" data-show-toolbar="false" data-show-errors="false"
+                data-show-logos="true" data-modal-game="true" data-modal-standings="true" data-modal-show-logos="true">
+            </div>
+            <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
+
+
+        </section>
+        <section id="Standings">
+            <div id="wg-api-football-standings" data-host="api-football-v1.p.rapidapi.com"
+                data-key="269ed5dbc7mshe975718ad9ad0c7p15dee0jsnb0e168e6abb7" data-league="39" data-team=""
+                data-season="2024" data-theme="" data-show-errors="false" data-show-logos="true" class="wg_loader">
+            </div>
+            <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
+
+        </section>
+        <section id="upcoming-matches">
+            <h2>Upcoming Matches</h2>
+            <!-- Upcoming matches will be rendered here -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Premier Match Hub. All rights reserved.</p>
+        <p>All you need to know about the best football league in the world.</p>
+    </footer>
+    <!-- <script type="module" src="./js/main.js"></script> -->
+</body>
+
+</html>

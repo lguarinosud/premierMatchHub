@@ -1,8 +1,11 @@
 import Fixture from "./fixture";
 
+const premierLeagueId = 39;
+const currentSeason = 2024;
+
 const fixture = new Fixture();
 
-const premierLeagueId = 39; // Verify this ID from the API documentation
-const currentSeason = 2024; // Specify the current season
-
-fixture.renderNextRoundFixtures(premierLeagueId, currentSeason);
+document.addEventListener("DOMContentLoaded", () => {
+  //fixture.renderFixtures(premierLeagueId, currentSeason);
+  fixture.renderNextRoundFixtures(premierLeagueId, currentSeason);
+});
