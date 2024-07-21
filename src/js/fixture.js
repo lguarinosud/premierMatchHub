@@ -1,31 +1,75 @@
-// /src/js/fixture.js
+// fixture.js
 import FootballAPI from "./api";
+import { getCachedData, setCachedData } from "./utils.js";
 
 export default class Fixture {
   constructor() {
     this.footballAPI = new FootballAPI();
   }
 
-  async fetchCurrentRound(leagueId, season) {
+  async fetchWithCache(endpoint) {
+    const cacheKey = `cache_${endpoint}`;
+    const cachedData = getCachedData(cacheKey);
+
+    if (cachedData) {
+      console.log("Loaded from cache:", `cache_${endpoint}`);
+      return cachedData;
+    }
+
     try {
-      const endpoint = `fixtures/rounds?league=${leagueId}&season=${season}&current=true`;
       const result = await this.footballAPI.fetchFootballData(endpoint);
-      return result.response[0];
+      setCachedData(cacheKey, result);
+      console.log("Loaded from API:", `cache_${endpoint}`);
+      return result;
     } catch (error) {
-      console.error("Error fetching current round:", error);
+      console.error("Error fetching data:", error);
       throw error;
     }
   }
 
+  async fetchCurrentRound(leagueId, season) {
+    const endpoint = `fixtures/rounds?league=${leagueId}&season=${season}&current=true`;
+    const result = await this.fetchWithCache(endpoint);
+    return result.response[0];
+  }
+
   async fetchFixturesForRound(leagueId, season, round) {
-    try {
-      const endpoint = `fixtures?league=${leagueId}&season=${season}&round=${round}`;
-      const result = await this.footballAPI.fetchFootballData(endpoint);
-      return result;
-    } catch (error) {
-      console.error("Error fetching fixtures for round:", error);
-      throw error;
+    const endpoint = `fixtures?league=${leagueId}&season=${season}&round=${round}`;
+    const result = await this.fetchWithCache(endpoint);
+    return result;
+  }
+  async renderFixtures(fixtures) {
+    const fixtureContainer = document.querySelector(".fixture-container");
+
+    if (!fixtureContainer) {
+      console.error("Container element not found");
+      return;
     }
+
+    fixtureContainer.innerHTML = fixtures
+      .map(
+        (fixture) => `
+            <div class="fixture">
+                <div class="team home">
+                    <img src="/images/TeamEscudo/${fixture.teams.home.name.toLowerCase()}-logo.png" alt="${fixture.teams.home.name} Logo">
+                    <span>${fixture.teams.home.name}</span>
+                </div>
+                <div class="details">
+                    <p>${new Date(fixture.fixture.date).toLocaleDateString()}</p>
+                    <p>Kick Off: ${new Date(fixture.fixture.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+                    <p>${fixture.fixture.venue.name}</p>
+                </div>
+                <div class="time">
+                    <span>${new Date(fixture.fixture.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                </div>
+                <div class="team away">
+                    <img src="/images/TeamEscudo/${fixture.teams.away.name.toLowerCase()}-logo.png" alt="${fixture.teams.away.name} Logo">
+                    <span>${fixture.teams.away.name}</span>
+                </div>
+            </div>
+        `,
+      )
+      .join("");
   }
 
   async renderNextRoundFixtures(leagueId, season) {
@@ -36,16 +80,29 @@ export default class Fixture {
         season,
         currentRound,
       );
-      const mainElement = document.querySelector("main");
+      const mainElement = document.querySelector(".fixture-container");
 
       mainElement.innerHTML = fixtures.response
         .map(
           (fixture) => `
-                <section>
-                    <h2>${fixture.teams.home.name} vs ${fixture.teams.away.name}</h2>
-                    <p>Date: ${new Date(fixture.fixture.date).toLocaleString()}</p>
-                    <p>Venue: ${fixture.fixture.venue.name}</p>
-                </section>
+                <div class="fixture">
+                <div class="team home">
+                    <img src="./images/TeamEscudo/${fixture.teams.home.name.toLowerCase()}-logo.png" alt="${fixture.teams.home.name} Logo">
+                    <span>${fixture.teams.home.name}</span>
+                </div>
+                <div class="details">
+                    <p>${new Date(fixture.fixture.date).toLocaleDateString()}</p>
+                    <p>Kick Off: ${new Date(fixture.fixture.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</p>
+                    <p>${fixture.fixture.venue.name}</p>
+                </div>
+                <div class="time">
+                    <span>${new Date(fixture.fixture.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                </div>
+                <div class="team away">
+                    <img src="./images/TeamEscudo/${fixture.teams.away.name.toLowerCase()}-logo.png" alt="${fixture.teams.away.name} Logo">
+                    <span>${fixture.teams.away.name}</span>
+                </div>
+            </div>
             `,
         )
         .join("");
@@ -54,3 +111,22 @@ export default class Fixture {
     }
   }
 }
+
+// async renderNextRoundFixtures(leagueId, season) {
+//     try {
+//         const currentRound = await this.fetchCurrentRound(leagueId, season);
+//         const fixtures = await this.fetchFixturesForRound(leagueId, season, currentRound);
+//         const mainElement = document.querySelector(".fixture-container");
+
+//         mainElement.innerHTML = fixtures.response.map((fixture) => `
+//             <div>
+//                 <h2>${fixture.teams.home.name} vs ${fixture.teams.away.name}</h2>
+//                 <p>Date: ${new Date(fixture.fixture.date).toLocaleString()}</p>
+//                 <p>Venue: ${fixture.fixture.venue.name}</p>
+//             </div>
+//         `).join("");
+//     } catch (error) {
+//         console.error("Error rendering next round fixtures:", error);
+//     }
+// }
+//}
