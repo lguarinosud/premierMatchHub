@@ -21,17 +21,12 @@ export function setCachedData(key, data) {
   localStorage.setItem(`${key}_timestamp`, new Date().getTime());
 }
 
-export function renderWithTemplate(
-  template,
-  parentElement,
-  data,
-  callback
-) {
+export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.insertAdjacentHTML("afterbegin", template);
 
   if (callback) {
     callback(data);
-  };
+  }
 }
 
 async function loadTemplate(path) {
