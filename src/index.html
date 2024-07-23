@@ -1,46 +1,51 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Premier League Fixtures</title>
     <link rel="stylesheet" href="/css/style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <header id="main-header">
-        <!-- Using templates in /partials/header.html -->
+      <!-- Using templates in /partials/header.html -->
     </header>
 
     <main>
-        <!-- 
+      <!-- 
         scroller == teams-row-container
         tag-list == teams-row -->
-        <section class="teams-row-container">
-            <div class="teams-row scroller__inner">
-                <!-- Teams will be dynamically inserted here -->
-            </div>
-        </section>
-        <section class="hero">
-            <img src="/images/Premier_League_Logo_hero.png" alt="Hero Image" />
-        </section>
-        <div id="home-container">
-            <section class="fixture-container">
-                <!-- Upcoming matches will be rendered here -->
-            </section>
-
-            <section id="twitter-feed">
-                <p>PLACEHOLDER as I've got limited calls to the API</p>
-                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                <div class="elfsight-app-d4fdd55d-75ae-4996-8009-bd95bad09d7f" data-elfsight-app-lazy></div>
-            </section>
+      <section class="teams-row-container">
+        <div class="teams-row scroller__inner">
+          <!-- Teams will be dynamically inserted here -->
         </div>
+      </section>
+      <section class="hero">
+        <img src="/images/Premier_League_Logo_hero.png" alt="Hero Image" />
+      </section>
+      <div id="home-container">
+        <section class="fixture-container">
+          <!-- Upcoming matches will be rendered here -->
+        </section>
+
+        <section id="twitter-feed">
+          <!-- <p>PLACEHOLDER as I've got limited calls to the API</p> -->
+          <script
+            src="https://static.elfsight.com/platform/platform.js"
+            data-use-service-core
+            defer
+          ></script>
+          <div
+            class="elfsight-app-d4fdd55d-75ae-4996-8009-bd95bad09d7f"
+            data-elfsight-app-lazy
+          ></div>
+        </section>
+      </div>
     </main>
     <footer id="main-footer">
-        <!-- Using templates in /partials/header.html -->
+      <!-- Using templates in /partials/header.html -->
     </footer>
     <script type="module" src="./js/main.js"></script>
-</body>
-
+  </body>
 </html>
